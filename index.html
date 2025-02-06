@@ -18,24 +18,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weather App</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="weather-container">
-    <h1>Weather App</h1>
-    <input type="text" id="city" placeholder="Enter city name" />
-    <button onclick="getWeather()">Get Weather</button>
-    <img id="weather-icon" alt="Weather icon">
-    <div id="temp-div"></div>
-    <div id="Weather-info"></div>
-    <div id="hourly-forecast"></div>
-  </div>
-    
-  
 
-  <script src="script.js"></script>
+    <div class="container">
+        <h1>Weather App</h1>
+        <div class="search-box">
+            <input type="text" id="cityInput" placeholder="Enter city name...">
+            <button onclick="fetchWeather()">Search</button>
+        </div>
+
+        <div class="weather-info">
+            <h2 id="city">City Name</h2>
+            <img id="weather-icon" src="https://cdn-icons-png.flaticon.com/512/4052/4052984.png" alt="Weather Icon">
+            <p id="temperature">--°C</p>
+            <p id="description">Weather Description</p>
+            <div class="extra-info">
+                <p>Humidity: <span id="humidity">--%</span></p>
+                <p>Wind Speed: <span id="wind">-- km/h</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Weather App</h1>
+        <div class="search-box">
+            <input type="text" id="cityInput" placeholder="Enter city name...">
+            <button onclick="fetchWeather()">Search</button>
+        </div>
+
+        <div class="weather-info">
+            <h2 id="city">City Name</h2>
+            <img id="weather-icon" src="" alt="Weather Icon">
+            <p id="temperature">--°C</p>
+            <p id="description">Weather Description</p>
+            <div class="extra-info">
+                <p>Humidity: <span id="humidity">--%</span></p>
+                <p>Wind Speed: <span id="wind">-- km/h</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

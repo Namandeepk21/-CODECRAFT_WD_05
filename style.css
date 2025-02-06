@@ -1,5 +1,5 @@
 
-body {
+/* body {
     font-family: Arial, sans-serif;
     background-color:#8c52ff;
     display: flex;
@@ -8,6 +8,7 @@ body {
     height: 100vh;
     margin: 0;
     padding: 0;
+
   }
   
   #weather-container {
@@ -19,7 +20,7 @@ body {
     border-radius:15px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.1);
     backdrop-filter: blur(10px);
-  
+  box-sizing: border-box;
   }
   
   input {
@@ -74,4 +75,87 @@ body {
   #hourly-heading{
     color:#fff;
     margin-top: 10px;
-  }
+  } */
+   /* General styles */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container */
+.container {
+  width: 90%;
+  max-width: 400px;
+  margin: 50px auto;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Search Box */
+.search-box {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.search-box input {
+  padding: 10px;
+  width: 70%;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.search-box button {
+  padding: 10px;
+  background: #ff9800;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+}
+
+.search-box button:hover {
+  background: #e68900;
+}
+
+/* Weather Info */
+.weather-info {
+  margin-top: 20px;
+}
+
+.weather-info h2 {
+  margin-bottom: 10px;
+}
+
+#weather-icon {
+  width: 80px;
+  height: 80px;
+}
+
+#temperature {
+  font-size: 2em;
+  margin: 10px 0;
+}
+
+#description {
+  font-style: italic;
+  font-size: 1.2em;
+}
+
+.extra-info {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.extra-info p {
+  font-size: 1em;
+}
