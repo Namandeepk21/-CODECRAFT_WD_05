@@ -1,8 +1,3 @@
-const apiKey = "22f230618ea1b97559bbbea62f3709c5"; // Replace with your OpenWeatherMap API key
- // Replace with your OpenWeatherMap API key
-const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
-
-// Function to fetch weather by city name
 async function fetchWeather() {
     const city = document.getElementById("cityInput").value;
 
@@ -12,13 +7,12 @@ async function fetchWeather() {
     }
 
     try {
-        const response = await fetch('${apiUrl}?q=${city}&appid=${apiKey}&units=metric');
-        const data = await response.json();
+        const response = await fetch(
+            `https://api.weatherapi.com/v1/current.json?key=3df6a5be170e40289ec165011250701&q=${city}&aqi=yes`
+        );
 
-        if (data.cod !== 200) {
-            alert("City not found. Please enter a valid city.");
-            return;
-        }
+        const data = await response.json();
+        console.log('data', data);
 
         updateWeatherUI(data);
     } catch (error) {
@@ -32,30 +26,43 @@ function getWeatherByLocation() {
         navigator.geolocation.getCurrentPosition(async (position) => {
             const { latitude, longitude } = position.coords;
             try {
-                const response = await fetch('${apiUrl}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric');
+                const response = await fetch(
+                    `https://api.weatherapi.com/v1/current.json?key=3df6a5be170e40289ec165011250701&q=${latitude},${longitude}&api=yes`);
                 const data = await response.json();
+                console.log('data', data);
                 updateWeatherUI(data);
             } catch (error) {
                 console.error("Error fetching weather:", error);
             }
-        });
+        },
+        (error) => {
+                console.error("Geolocation error:", error);
+                if (error.code === error.PERMISSION_DENIED) {
+                    alert("Please enable location services or allow access to location to get weather updates.");
+                } else if (error.code === error.POSITION_UNAVAILABLE) {
+                    alert("Location information is unavailable. Please try again.");
+                } else if (error.code === error.TIMEOUT) {
+                    alert("Request to get location timed out. Please try again.");
+                } else {
+                    alert("An unknown error occurred while fetching location.");
+                }
+            }
+        );
     } else {
-        alert("Geolocation is not supported by this browser.");
+        window.alert("Geolocation is not supported by this browser.");
     }
 }
 
 // Function to update the UI with fetched weather data
 function updateWeatherUI(data) {
-    document.getElementById("city").innerText = data.name;
-    document.getElementById("temperature").innerText ='${Math.round(data.main.temp)}°C';
-    document.getElementById("description").innerText = 'data.weather[0].description';
-    document.getElementById("humidity").innerText = '${data.main.humidity}% ';
-    document.getElementById("wind").innerText = '${data.wind.speed} km/h';
+    document.getElementById("city").innerText = data.location.name;
+    document.getElementById("temperature").innerText = data.current.temp_c + '°C';
+    document.getElementById("description").innerText = data.current.condition.text;
+    document.getElementById("humidity").innerText = `${data.current.humidity}%`;
+    document.getElementById("wind").innerText = `${data.current.wind_kph} km/h`;
 
     // Update weather icon
-    const iconCode = 'data.weather[0].icon';
-    document.getElementById("weather-icon").src = 'https://openweathermap.org/img/wn/${iconCode}.png';
-}
+    const icon = data.current.condition.icon;
+    document.getElementById("weather-icon").src = icon;
 
-// Auto-fetch weather on page load using user location
-window.onload = getWeatherByLocation;
+}
